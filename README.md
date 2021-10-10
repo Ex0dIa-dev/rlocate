@@ -38,4 +38,5 @@ rlocate -c -i PaSsWoRD
 - [x] *ignore case*
 - [ ] *regexp as pattern*
 - [ ] *match only the basename*
+- [ ] *colored output matches*
 
