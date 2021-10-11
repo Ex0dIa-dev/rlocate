@@ -29,6 +29,7 @@ rlocate -c -i PaSsWoRD
 
 - **'-c'** ==> *only print number of found entries*
 - **'-i'** ==> *ignore case distinctions when matching patterns*
+- **'-n'** ==> *print the found entries without colored string*
 
 ****
 
@@ -38,5 +39,4 @@ rlocate -c -i PaSsWoRD
 - [x] *ignore case*
 - [ ] *regexp as pattern*
 - [ ] *match only the basename*
-- [ ] *colored output matches*
-
+- [x] *colored output matches*

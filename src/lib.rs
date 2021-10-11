@@ -1,19 +1,24 @@
 extern crate walkdir;
 use walkdir::WalkDir;
 
+extern crate colored;
+use colored::*;
+
 pub struct Config<'a> {
     pattern: &'a str,
     count: bool,
     ignore_case: bool,
+    no_color: bool,
     //regexp
 }
 
 impl<'a> Config<'a> {
-    pub fn new(pattern: &'a str, count: bool, ignore_case: bool) -> Config<'a> {
+    pub fn new(pattern: &'a str, count: bool, ignore_case: bool, no_color: bool) -> Config<'a> {
         Config {
             pattern,
             count,
             ignore_case,
+            no_color,
         }
     }
 }
@@ -32,10 +37,22 @@ pub fn rlocate(cfg: Config) {
             if cfg.count {
                 matches += 1;
             } else {
-                println!("{}", path);
+                if cfg.no_color {
+                    println!("{}", entry.path().display());
+                } else {
+                    let pos = path.find(&pattern).unwrap();
+                    println!(
+                        "{}{}{}",
+                        &entry.path().to_str().unwrap_or("").to_string()[..pos],
+                        &entry.path().to_str().unwrap_or("").to_string()[pos..pos + pattern.len()]
+                            .green(),
+                        &entry.path().to_str().unwrap_or("").to_string()[pos + pattern.len()..]
+                    );
+                }
             }
         }
     }
+
     if cfg.count {
         println!("{}", matches);
     }
